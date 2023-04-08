@@ -14,7 +14,7 @@ default:
 	@echo "____________________ demo - compile and run the demo"
 	@echo "____________________ check - runs checkstyle"
 	@echo "____________________ compile - compiles all classes"
-	@echo "____________________ clean - removes all class files"
+	@echo "____________________ clean - removes all .class files"
 
 rank:
 	javac $(JAVAC_FLAGS) src/main/deck/Rank.java
@@ -34,7 +34,7 @@ playingCard:
 deck:
 	javac $(JAVAC_FLAGS) src/main/deck/Deck.java
 	javac $(JAVAC_FLAGS) src/tests/deck/DeckTest.java
-	java $(JUNIT_FLAGS) deck.PlayingCardTest
+	java $(JUNIT_FLAGS) deck.DeckTest
 
 compile:
 	javac $(JAVAC_FLAGS) src/**/**/*.java
