@@ -1,7 +1,10 @@
 package deck;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
+
+import utils.ClassInspections;
 
 /**
  * Unit tests for the Rank enum.
@@ -18,6 +21,15 @@ public class RankTest
         "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN",
         "EIGHT", "NINE", "TEN", "JACK", "QUEEN", "KING", "ACE"
     };
+
+    /**
+     * Checks that the enum is public.
+     */
+    @Test
+    public void testEnumIsPublic()
+    {
+        ClassInspections.checkClassModifier("deck.Rank", true, false, false);
+    }
 
     /**
      * Tests the enum values and order.

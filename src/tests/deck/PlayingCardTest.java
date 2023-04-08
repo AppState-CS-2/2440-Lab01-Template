@@ -1,9 +1,11 @@
 package deck;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import utils.ClassInspections;
 
 /**
  * Unit tests for the PlayingCard class.
@@ -33,6 +35,32 @@ public class PlayingCardTest
     public void beforeEach()
     {
         card = new PlayingCard(INIT_RANK, INIT_SUIT);
+    }
+
+    /**
+     * Checks that the PlayingCard class is public.
+     */
+    @Test
+    public void testEnumIsPublic()
+    {
+        ClassInspections.checkClassModifier("deck.PlayingCard", true, false, false);
+    }
+
+    /**
+     * Checks that the fields have the proper modifiers.
+     */
+    @Test
+    public void testFieldDeclarations()
+    {
+        String className = "deck.PlayingCard";
+        String[] fieldNames = {"rank", "suit"};
+        boolean[] isPublic = {false, false};
+        boolean[] isProtected = {false, false};
+        boolean[] isPrivate = {true, true};
+        boolean[] isStatic = {false, false};
+        boolean[] isFinal = {false, false};
+        ClassInspections.testFieldDeclarations(className, fieldNames,
+            isPublic, isPrivate, isProtected, isStatic, isFinal);
     }
 
     /**
@@ -93,7 +121,7 @@ public class PlayingCardTest
             for (Suit s : Suit.values())
             {
                 card = new PlayingCard(r, s);
-                assertEquals(String.format("%s %s",
+                assertEquals(String.format("%s of %s",
                     r.toString(), s.toString()), card.toString(),
                     "toString method has invalid output.");
             }
