@@ -1,7 +1,7 @@
 JUNIT5_JAR = lib/junit-platform-console-standalone-1.8.2.jar 
 JUNIT5_RUNNER = org.junit.platform.console.ConsoleLauncher
 CKSTYLE_COMMAND =  -jar lib/checkstyle-10.5.0-all.jar 
-JAVAC_FLAGS = -d bin -cp src/main:$(JUNIT5_JAR)
+JAVAC_FLAGS = -d bin -cp src/main:src/tests:$(JUNIT5_JAR)
 JUNIT_FLAGS = -jar $(JUNIT5_JAR) -cp bin --select-class 
 
 default: 
@@ -17,23 +17,19 @@ default:
 	@echo "____________________ clean - removes all .class files"
 
 rank:
-	javac $(JAVAC_FLAGS) src/main/deck/Rank.java
-	javac $(JAVAC_FLAGS) src/tests/deck/RankTest.java
+	javac $(JAVAC_FLAGS) src/*/deck/Rank*.java
 	java $(JUNIT_FLAGS) deck.RankTest
 
 suit:
-	javac $(JAVAC_FLAGS) src/main/deck/Suit.java
-	javac $(JAVAC_FLAGS) src/tests/deck/SuitTest.java
+	javac $(JAVAC_FLAGS) src/*/deck/Suit*.java
 	java $(JUNIT_FLAGS) deck.SuitTest
 
 playingCard:
-	javac $(JAVAC_FLAGS) src/main/deck/PlayingCard.java
-	javac $(JAVAC_FLAGS) src/tests/deck/PlayingCardTest.java
+	javac $(JAVAC_FLAGS) src/*/deck/PlayingCard*.java
 	java $(JUNIT_FLAGS) deck.PlayingCardTest
 
 deck:
-	javac $(JAVAC_FLAGS) src/main/deck/Deck.java
-	javac $(JAVAC_FLAGS) src/tests/deck/DeckTest.java
+	javac $(JAVAC_FLAGS) src/*/deck/Deck*.java
 	java $(JUNIT_FLAGS) deck.DeckTest
 
 compile:
