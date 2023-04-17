@@ -87,11 +87,11 @@ public class ClassInspections
                 String.format("Class: %s should %sbe public", className,
                     Modifier.isPublic(modifiers) ? "not " : ""));
             assertEquals(isProtected, Modifier.isProtected(modifiers));
-                String.format("Class: %s should %sbe public", className,
-                    Modifier.isPublic(modifiers) ? "not " : "");
+                String.format("Class: %s should %sbe protected", className,
+                    Modifier.isProtected(modifiers) ? "not " : "");
             assertEquals(isPrivate, Modifier.isPrivate(modifiers));
-                String.format("Class: %s should %sbe public", className,
-                    Modifier.isPublic(modifiers) ? "not " : "");
+                String.format("Class: %s should %sbe private", className,
+                    Modifier.isPrivate(modifiers) ? "not " : "");
         } catch (ClassNotFoundException e) {
             fail(String.format("Could not find the class: %s", className));
         }
@@ -117,7 +117,7 @@ public class ClassInspections
                 Modifier.isPublic(modifier) ? "not " : ""));
 
         assertEquals(isProtected, Modifier.isProtected(modifier),
-            String.format("Field: %s should %sbe public", fieldName,
+            String.format("Field: %s should %sbe protected", fieldName,
                 Modifier.isProtected(modifier) ? "not " : ""));
 
         assertEquals(isPrivate, Modifier.isPrivate(modifier),
@@ -129,7 +129,7 @@ public class ClassInspections
                 Modifier.isStatic(modifier) ? "not " : ""));
 
         assertEquals(isFinal, Modifier.isFinal(modifier),
-            String.format("Field: %s should %sbe private", fieldName,
+            String.format("Field: %s should %sbe final", fieldName,
                 Modifier.isFinal(modifier) ? "not " : ""));
     }
 }
