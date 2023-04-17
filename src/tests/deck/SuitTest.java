@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import utils.ClassInspections;
+import util.ClassInspections;
 
 /**
  * Unit tests for the Suit enum.

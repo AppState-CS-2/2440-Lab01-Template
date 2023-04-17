@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
-import utils.ClassInspections;
+import util.ClassInspections;
 
 /**
  * Unit tests for the PlayingCard class.
