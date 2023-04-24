@@ -24,12 +24,23 @@
         <module name="Indentation">
             <property name="caseIndent" value="4"/>
         </module>
-        <module name="JavadocStyle"/>
+        <module name="JavadocStyle">
+            <property name="checkEmptyJavadoc" value="true"/>
+        </module>
+        <module name="InvalidJavadocPosition"/>
+        <module name="JavadocBlockTagLocation"/>
+        <module name="JavadocContentLocationCheck"/>
+        <module name="JavadocMissingLeadingAsterisk"/>
+        <module name="JavadocMissingWhitespaceAfterAsterisk"/>
+        <module name="MissingJavadocMethod"/>
+        <module name="MissingJavadocType"/>
         <module name="JavadocType">
             <property name="authorFormat" value="\S"/>
             <property name="versionFormat" value="\S"/>
         </module>
-        <module name="JavadocMethod"/>
+        <module name="JavadocMethod">
+            <property name="validateThrows" value="true"/>
+        </module>
         <module name="TrailingComment"/>
         <module name="MultipleVariableDeclarations"/>
         <module name="MethodLength">
