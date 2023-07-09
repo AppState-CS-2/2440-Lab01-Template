@@ -1,7 +1,10 @@
 package deck;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
+
+import util.ClassInspections;
 
 /**
  * Unit tests for the Suit enum.
@@ -18,6 +21,15 @@ public class SuitTest
     private static final String[] EXPECTED_STRINGS = {
         "CLUBS", "DIAMONDS", "HEARTS", "SPADES"
     };
+
+    /**
+     * Checks that the enum is public.
+     */
+    @Test
+    public void testEnumIsPublic()
+    {
+        ClassInspections.checkClassModifier("deck.Suit", true, false, false);
+    }
 
     /**
      * Tests the enum values and order.

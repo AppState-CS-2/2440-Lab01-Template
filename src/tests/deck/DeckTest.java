@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import util.ClassInspections;
+
 /**
  * Unit tests for the Deck class.
  * 
@@ -17,12 +19,12 @@ public class DeckTest
     /**
      * The number of cards that should be in the deck.
      */
-    public static final int NUM_CARDS = 52;
+    private int numCards = 52;
 
     /**
      * The seed for the random number generator.
      */
-    public static final int SEED = 12414543;
+    private int seed = 12414543;
     
     /**
      * The deck object used for testing.
@@ -35,7 +37,33 @@ public class DeckTest
     @BeforeEach
     public void beforeEach()
     {
-        deck = new Deck(SEED);
+        deck = new Deck(seed);
+    }
+
+    /**
+     * Tests that the deck class is public.
+     */
+    @Test
+    public void testDeckIsPublic()
+    {
+        ClassInspections.checkClassModifier("deck.Deck", true, false, false);
+    }
+
+    /**
+     * Checks that the fields have the proper modifiers.
+     */
+    @Test
+    public void testFieldDeclarations()
+    {
+        String className = "deck.Deck";
+        String[] fieldNames = {"NUM_CARDS", "generator", "deck"};
+        boolean[] isPublic = {true, false, false};
+        boolean[] isProtected = {false, false, false};
+        boolean[] isPrivate = {false, true, true};
+        boolean[] isStatic = {true, false, false};
+        boolean[] isFinal = {true, false, false};
+        ClassInspections.testFieldDeclarations(className, fieldNames,
+            isPublic, isPrivate, isProtected, isStatic, isFinal);
     }
 
     /**
@@ -60,15 +88,18 @@ public class DeckTest
 
     /**
      * Tests the deck's shuffle method.
+     * The average number of cards that are in new places
+     * after shuffling should not be less than lowerAvgBound.
      */
     @Test
     public void testShuffle()
     {
-        Deck deck2 = new Deck(SEED);
+        int lowerAvgBound = 48;
+        Deck deck2 = new Deck(seed);
         deck.shuffleDeck();
         deck2.shuffleDeck();
         // Test that shuffling with the same seed are consistent.
-        for (int i = 0; i < NUM_CARDS; i++)
+        for (int i = 0; i < numCards; i++)
         {
             assertEquals(deck2.getCard(i).getRank(),
                 deck.getCard(i).getRank(),
@@ -96,8 +127,22 @@ public class DeckTest
             a = b;
         }
         int avgDiff = (int) (totalDiff / numTrials);
-        int lowerBound = 40;
-        assertTrue(avgDiff >= lowerBound);
+        assertTrue(avgDiff >= lowerAvgBound);
+    }
+
+    /**
+     * Tests the output of toString.
+     */
+    @Test
+    public void testToString()
+    {
+        String errorMessage = "Deck toString has incorrect output. "
+            + "This could be an error in the Deck or PlayingCard toString methods";
+        assertEquals(getCorrectToStringOutput(deck), deck.toString(), errorMessage);
+        deck.shuffleDeck();
+        assertEquals(getCorrectToStringOutput(deck), deck.toString(), errorMessage);
+        deck.shuffleDeck();
+        assertEquals(getCorrectToStringOutput(deck), deck.toString(), errorMessage);
     }
 
     /**
@@ -147,5 +192,16 @@ public class DeckTest
             }
         }
         return diffPosition;
+    }
+
+    private String getCorrectToStringOutput(Deck d)
+    {
+        String output = "";
+        for (int i = 0; i < numCards; i++)
+        {
+            output += String.format("%s of %s, ",
+                d.getCard(i).getRank(), d.getCard(i).getSuit());
+        }
+        return output.substring(0, output.length() - 2);
     }
 }
